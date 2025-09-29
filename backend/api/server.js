@@ -6,6 +6,16 @@ const app = express();
 app.use(cors());
 
 const GOOGLE_SCRIPT_URL = process.env.GOOGLE_SCRIPT_URL;
+const PORT = process.env.PORT || 4000;
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.use(express.static(path.join(__dirname, "../public")));
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../public", "index.html"));
+});
 
 app.get("/api/products", async (req, res) => {
     try {
@@ -31,11 +41,8 @@ app.get("/api/products", async (req, res) => {
     }
 });
 
-if (process.env.NODE_ENV !== 'production') {
-    const PORT = 4000;
-    app.listen(PORT, () => {
-        console.log(`✅ Сервер запущен на http://localhost:${PORT}`);
-    });
-}
+app.listen(PORT, () => {
+    console.log(`✅ Сервер запущен на http://localhost:${PORT}`);
+});
 
 export default app;
