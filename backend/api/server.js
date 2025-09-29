@@ -5,24 +5,10 @@ import cors from "cors";
 const app = express();
 app.use(cors());
 
-const GOOGLE_SCRIPT_URL = process.env.GOOGLE_SCRIPT_URL;
-const PORT = process.env.PORT || 4000;
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-app.use(express.static(path.join(__dirname, "../public")));
-
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../public", "index.html"));
-});
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyLtMhkOyFll-iSYiNNrskRe_68cwwEEr6kZ7OSIm2bnZhLS-7LjCXHeJJz0g3cGinVUg/exec";
 
 app.get("/api/products", async (req, res) => {
     try {
-        if (!GOOGLE_SCRIPT_URL) {
-            throw new Error("GOOGLE_SCRIPT_URL не установлен");
-        }
-
         const queryString = new URLSearchParams(req.query).toString();
         const finalUrl = queryString ? `${GOOGLE_SCRIPT_URL}?${queryString}` : GOOGLE_SCRIPT_URL;
 
@@ -41,8 +27,8 @@ app.get("/api/products", async (req, res) => {
     }
 });
 
+const PORT = 4000;
 app.listen(PORT, () => {
     console.log(`✅ Сервер запущен на http://localhost:${PORT}`);
+    console.log(`📍 Тест напрямую: http://localhost:${PORT}/api/products`);
 });
-
-export default app;
