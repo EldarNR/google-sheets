@@ -1,1 +1,1 @@
-export const SCRIPT_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000/api/products';
+export const SCRIPT_URL = process.env.PUBLIC_URL_FRONT || 'http://localhost:4000/api/products';

@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "backend/server.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": ".package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "./dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "backend/api/(.*)",
+      "dest": "server.js"
+    }
+  ],
+  "env": {
+    "PUBLIC_URL_FRONT": "https://google-sheets-git-main-eldarnrs-projects.vercel.app",
+    "NODE_ENV": "PUBLIC",
+    "GOOGLE_SCRIPT_URL": "https://script.google.com/macros/s/AKfycbyLtMhkOyFll-iSYiNNrskRe_68cwwEEr6kZ7OSIm2bnZhLS-7LjCXHeJJz0g3cGinVUg/exec"
+  }
+}
