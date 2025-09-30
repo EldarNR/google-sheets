@@ -10,10 +10,12 @@
 
 ### 1. Клонирование проекта
 ```bash
-git clone <твой-репозиторий>
-cd backend && npm install
+git clone https://github.com/EldarNR/google-sheets.git
+cd backend
+npm install
 npm run server
-cd .. && cd frontend
+cd ..
+cd frontend
 npm install
 npm start
 
